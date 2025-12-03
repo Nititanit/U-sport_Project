@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+
+*{
+    font-family: "Noto Sans Thai", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding: none;
+}
+
+body{
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+main{
+    flex-grow: 1 !important;
+}
+
+footer{
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+}
+
+.footer-link {
+    color: #fff
+}
+
+.footer-section-2{
+    margin-left: auto;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.navbar{
+    border-bottom: 7px solid #105DB3 !important;
+}
+
+.nav-active{
+    color: #105DB3 !important;
+}
+
+.nav-dropdown, .search-btn, .select-box{
+    border: 1px solid #d8d8d8 !important;
+    border-radius: 6px;
+    height: 100%;
+    display: block;
+}
+
+.nav-right-section{
+    display: flex !important;
+}
+
+.carousel-image{
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+}
+
+.grow{
+    flex-grow: 1 !important;
+}
+
+.menubar-image{
+    max-width: 120px;
+    height: auto;
+}
+
+.sub-main{
+    background-color: #f1f1f1;
+    padding: 5rem 0;
+    background-image: url("../../assets/images/bg-home.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.col-header h4{
+    border-bottom: 5px solid #105DB3;
+    font-size: 28px;
+    max-width: fit-content;
+}
+
+.row-custom{
+    display: grid;
+    gap: 1rem;
+}
+
+.info-title{
+    color: #105DB3;
+    font-weight: 600;
+}
+
+.view-btn{
+    background: #333;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 5px 16px;
+    margin-left: auto
+}
+
+.view-icon{
+    background: #ff0000;
+    border: none;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px
+}
+
+.card-footer-custom{
+    display: flex;
+}
+
+.viewMore-btn{
+    background: #105DB3;
+    border: none;
+    font-size: 14px;
+    margin-left: auto;
+}
+.logout-btn{
+   padding: 4px 16px; 
+   color: #000;
+   transition-property: all;
+   transition-duration: 150ms;
+}
+.logout-btn:hover{
+    background: #be0000;
+    color: #fff;
+}
+.language-select .nav-item{
+    max-width: fit-content;
+}
+.language-option img{
+    max-height: 22px;
+    width: auto;
+}
