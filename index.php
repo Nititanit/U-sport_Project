@@ -1,334 +1,288 @@
 <?php
-// --- Mock Data (เหมือนเดิม) ---
+// --- Mock Data (ข้อมูลเดิม) ---
 $sports_categories = [
-    [ 'name' => 'Football', 'color' => '#ffe0b2', 'img' => 'https://cdn-icons-png.flaticon.com/512/3292/3292153.png' ],
-    [ 'name' => 'Fitness', 'color' => '#ffcdd2', 'img' => 'https://cdn-icons-png.flaticon.com/512/2548/2548535.png' ],
-    [ 'name' => 'Badminton', 'color' => '#b2ebf2', 'img' => 'https://cdn-icons-png.flaticon.com/512/2548/2548512.png' ], // เพิ่มตัวอย่างให้เห็นภาพบนจอใหญ่
-    [ 'name' => 'Swimming', 'color' => '#e1bee7', 'img' => 'https://cdn-icons-png.flaticon.com/512/2906/2906263.png' ]
+    [ 'name' => 'Football', 'color' => '#ffe0b2'],
+    [ 'name' => 'Fitness', 'color' => '#ffcdd2'],
 ];
 
 $venues = [
     [
         'id' => 1,
         'name' => 'Stadium 1(VIP)',
-        'location' => 'Stephenson road, Perambur',
+        'location' => 'Khlong 6, Pathum Thani',
         'rating' => 4.0, 'reviews' => 4,
-        'image' => 'https://images.unsplash.com/photo-1522778119026-d647f0565c6a?auto=format&fit=crop&w=600&q=80',
+        'image' => 'assets/images/stadium1.jpg',
         'type' => 'Football'
     ],
     [
         'id' => 2,
         'name' => 'Stadium 2(VIP)',
-        'location' => 'OMR Road, Navalur',
+        'location' => 'Khlong 6, Pathum Thani',
         'rating' => 4.5, 'reviews' => 12,
-        'image' => 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80',
+        'image' => 'assets/images/stadium1.jpg',
         'type' => 'Football'
     ],
-    // เพิ่มข้อมูลจำลองเพื่อให้เห็น Grid ชัดเจนขึ้น
     [
         'id' => 3,
-        'name' => 'City Arena Turf',
-        'location' => 'Central Park, NY',
+        'name' => 'Stadium 3',
+        'location' => 'Khlong 6, Pathum Thani',
         'rating' => 4.8, 'reviews' => 20,
-        'image' => 'https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=600&q=80',
+        'image' => 'assets/images/stadium.jpg',
         'type' => 'Football'
     ],
     [
         'id' => 4,
-        'name' => 'Pro Gym & Fitness',
-        'location' => 'Downtown Street',
+        'name' => 'Stadium 4',
+        'location' => 'Khlong 6, Pathum Thani',
+        'rating' => 4.8, 'reviews' => 20,
+        'image' => 'assets/images/stadium.jpg',
+        'type' => 'Football'
+    ],
+    [
+        'id' => 5,
+        'name' => 'Fitness U Sport',
+        'location' => 'Khlong 6, Pathum Thani',
         'rating' => 4.2, 'reviews' => 8,
-        'image' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80',
+        'image' => 'assets/images/fitness.png',
         'type' => 'Fitness'
     ]
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<style>
-        /* --- CSS Global --- */
+    <title>U-Sport Booking (Bootstrap Version)</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Custom CSS (เขียนทับ Bootstrap บางส่วนเพื่อให้สวยงามตามธีมเดิม) */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* --- Navbar (Top) --- */
-        .navbar {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 24px;
+        /* Navbar Customization */
+        .navbar-brand {
             font-weight: bold;
-            color: #2e7d32; /* สีเขียวหลัก */
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: red !important;
         }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: #2e7d32;
-        }
-        .search-box-desktop {
-            position: relative;
-            width: 300px;
-        }
-        .search-box-desktop input {
-            width: 100%;
-            padding: 10px 40px 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            background: #f1f1f1;
-            outline: none;
-        }
-        .search-box-desktop i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #777;
+        .nav-link.active {
+            color: #2e7d32 !important;
+            font-weight: 600;
         }
 
-        /* --- Main Layout --- */
-        .main-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* Banner */
+        /* Banner (ยังใช้ Custom เพราะเป็นดีไซน์เฉพาะ) */
         .promo-banner {
-            background-image: url('assets/images/Promo_u-sport.jpg');
             color: #fff;
-            border-radius: 16px;
-            padding: 150px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 50px;
+            position: relative;
+            align-items: center; 
+            overflow: hidden;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        /* Section Titles */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .promo-img img { 
+            height: fit-content;
+            object-fit: contain;
+            margin-left: 50px;
         }
-        h3.section-title { font-size: 24px; margin: 0; }
 
-        /* Categories Grid */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive Grid */
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+        /* Category Cards (Custom Design) */
         .cat-card {
             height: 120px;
             border-radius: 12px;
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: flex-end;
             padding: 15px;
             cursor: pointer;
             transition: transform 0.3s;
         }
-        .cat-card:hover { transform: translateY(-5px); }
-        .cat-card span { font-weight: bold; font-size: 18px; color: #333; z-index: 2; }
-        .cat-card img { position: absolute; right: -10px; bottom: -10px; height: 100px; opacity: 0.8; }
+        .cat-card:hover { 
+            transform: translateY(-5px); 
+        }
 
-        /* Filters */
-        .filter-bar {
-            background: #fff;
-            padding: 15px;
+        .cat-card span { 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            color: #333; 
+            position: relative; 
+            z-index: 2; 
+        }
+        .cat-card img { 
+            position: absolute; 
+            right: -10px; 
+            bottom: -10px; 
+            height: 100px; 
+            opacity: 0.8; 
+        }
+
+        /* Customizing Bootstrap Card */
+        .card {
+            border: none;
             border-radius: 12px;
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            border: 1px solid #eee;
-        }
-        .tag {
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            background: #fff;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .tag:hover { background: #f0f0f0; }
-        .tag.active-orange { background-color: #ff3d00; color: #fff; border-color: #ff3d00; }
-        .tag.active-green { background-color: #00c853; color: #fff; border-color: #00c853; }
-
-        /* Venues Grid (หัวใจสำคัญของ Web Layout) */
-        .venue-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 คอลัมน์บนจอใหญ่ */
-            gap: 25px;
-        }
-        
-        /* Responsive Breakpoints */
-        @media (max-width: 1024px) { .venue-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { .venue-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 480px) { .venue-grid { grid-template-columns: 1fr; } } /* กลับไปเป็น 1 แถวถ้าจอเล็กมาก */
-
-        /* Venue Card Styles */
-        .venue-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #eee;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             transition: box-shadow 0.3s;
         }
-        .venue-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
-        .venue-img-wrapper { position: relative; height: 200px; }
-        .venue-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
+        .card:hover { 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+         }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
         .heart-icon {
-            position: absolute; top: 10px; right: 10px;
-            background: rgba(255,255,255,0.9); padding: 8px;
-            border-radius: 50%; color: #aaa; cursor: pointer;
+            position: absolute; 
+            top: 10px; 
+            right: 10px;
+            background: rgba(255,255,255,0.9); 
+            padding: 8px;
+            border-radius: 50%; 
+            color: #aaa; 
+            cursor: pointer;
             transition: color 0.3s;
         }
-        .heart-icon:hover { color: #f44336; }
-
-        .venue-info { padding: 15px; }
-        .venue-name { font-weight: bold; font-size: 18px; margin-bottom: 5px; color: #222; }
-        .venue-location { font-size: 13px; color: #777; margin-bottom: 10px; }
+        .heart-icon:hover { 
+            color: #f44336;
+        }
         
         .rating-badge {
-            background-color: #4caf50; color: #fff;
-            padding: 4px 8px; border-radius: 4px;
-            font-size: 12px; display: inline-flex; align-items: center; gap: 4px;
+            background-color: #4caf50; 
+            color: #fff;
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-size: 0.8rem;
+        }
+        
+        /* Filter Tags */
+        .btn-filter {
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #666;
+            margin-right: 5px;
         }
 
-        .venue-footer {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-top: 15px; padding-top: 15px; border-top: 1px solid #f5f5f5;
+        .btn-filter.active-green { 
+            background-color: #00c853; 
+            color: white; 
+            border-color: #00c853; 
         }
-        .btn-book {
-            background-color: #2e7d32; color: #fff; border: none;
-            padding: 8px 16px; border-radius: 6px; cursor: pointer;
-            font-size: 14px;
+
+        .btn-filter.active-orange { 
+            background-color: #ff3d00; 
+            color: white; 
+            border-color: #ff3d00; 
         }
-        .btn-book:hover { background-color: #1b5e20; }
+
+        /* Search Box Wrapper */
+        .search-wrapper { 
+            position: relative; 
+        }
+        .search-wrapper i { 
+            position: absolute; 
+            right: 15px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            color: #888; 
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-running"></i> U-Sport
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+              U-Sport
+            </a>
             
-            <div class="search-box-desktop">
-                <input type="text" placeholder="Find sports, venues...">
-                <i class="fas fa-search"></i>
-            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="nav-links">
-                <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-futbol"></i> Venues</a>
-                <a href="#"><i class="fas fa-calendar-check"></i> My Bookings</a>
-                <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex mx-auto my-3 my-lg-0 search-wrapper" style="width: 100%; max-width: 400px;">
+                    <input class="form-control rounded-pill ps-3 pe-5" type="search" placeholder="Find sports, venues..." aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </form>
+
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-futbol"></i> Venues</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div class="main-container">
+    <div class="container my-4">
         
-        <div class="promo-banner">
+        <div class="promo-banner mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-end mt-3 mt-md-0 promo-img">
+                    <img src="assets/images/Promo_u-sport.jpg" alt="Sport Player">
+                </div>
+            </div>
         </div>
 
-        <div class="section-header">
-            <h3 class="section-title">Explore Sports</h3>
-        </div>
-        <div class="category-grid">
+        <h3 class="h4 mb-3 fw-bold">Explore Sports</h3>
+        <div class="row g-3 mb-5">
             <?php foreach ($sports_categories as $cat): ?>
-                <div class="cat-card" style="background-color: <?php echo $cat['color']; ?>;">
-                    <span><?php echo $cat['name']; ?></span>
-                    <img src="<?php echo $cat['img']; ?>" alt="<?php echo $cat['name']; ?>">
+                <div class="col-6 col-md-3">
+                    <div class="cat-card h-100" style="background-color: <?php echo $cat['color']; ?>;">
+                        <span><?php echo $cat['name']; ?></span>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
 
-        <div class="section-header">
-            <h3 class="section-title">Available Venues</h3>
-            <div class="filter-bar" style="margin-bottom:0; background:none; border:none; padding:0;">
-                <button class="tag active-orange">15 Sep</button>
-                <button class="tag active-green">All</button>
-                <button class="tag">Football</button>
-                <button class="tag">Fitness</button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="h4 fw-bold mb-0">Available Venues</h3>
+            <div class="d-none d-md-block">
+                <button class="btn btn-sm btn-filter active-orange">15 Sep</button>
+                <button class="btn btn-sm btn-filter active-green">All</button>
+                <button class="btn btn-sm btn-filter">Football</button>
+                <button class="btn btn-sm btn-filter">Fitness</button>
             </div>
         </div>
 
-        <div class="venue-grid">
+        <div class="row g-4">
             <?php foreach ($venues as $venue): ?>
-                <div class="venue-card">
-                    <div class="venue-img-wrapper">
-                        <img src="<?php echo $venue['image']; ?>" alt="<?php echo $venue['name']; ?>">
-                        <div class="heart-icon"><i class="far fa-heart"></i></div>
-                    </div>
-                    <div class="venue-info">
-                        <div class="venue-name"><?php echo $venue['name']; ?></div>
-                        <div class="venue-location">
-                            <i class="fas fa-map-marker-alt" style="color:#888; margin-right:5px;"></i>
-                            <?php echo $venue['location']; ?>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div class="rating-badge">
-                                <i class="fas fa-star" style="font-size:10px;"></i> 
-                                <?php echo $venue['rating']; ?> (<?php echo $venue['reviews']; ?>)
-                            </div>
-                            <span style="font-size:12px; color:#666;"><?php echo $venue['type']; ?></span>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="position-relative">
+                            <img src="<?php echo $venue['image']; ?>" class="card-img-top" alt="<?php echo $venue['name']; ?>">
+                            <div class="heart-icon"><i class="far fa-heart"></i></div>
                         </div>
                         
-                        <div class="venue-footer">
-                            <div class="features" style="color:#666;">
-                                <i class="fas fa-wifi" title="Wifi"></i>
-                                <i class="fas fa-shower" title="Shower"></i>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold mb-1"><?php echo $venue['name']; ?></h5>
+                            <p class="card-text text-muted small mb-2">
+                                <i class="fas fa-map-marker-alt me-1"></i> <?php echo $venue['location']; ?>
+                            </p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="rating-badge">
+                                    <i class="fas fa-star fa-xs me-1"></i> <?php echo $venue['rating']; ?> (<?php echo $venue['reviews']; ?>)
+                                </span>
+                                <small class="text-muted"><?php echo $venue['type']; ?></small>
+                            </div>
+
+                            <div class="mb-3 text-muted">
+                                <i class="fas fa-wifi me-2" title="Wifi"></i>
+                                <i class="fas fa-shower me-2" title="Shower"></i>
                                 <i class="fas fa-parking" title="Parking"></i>
                             </div>
-                            <button class="btn-book">Book Now</button>
+
+                            <a href="details-1.php?id=<?php echo $venue['id']; ?>" class="btn btn-success w-100 mt-auto fw-bold">
+                                Book Now
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -337,5 +291,6 @@ $venues = [
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
